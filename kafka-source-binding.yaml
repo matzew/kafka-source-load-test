@@ -1,0 +1,18 @@
+apiVersion: camel.apache.org/v1alpha1
+kind: KameletBinding
+metadata:
+  name: kafka-not-secured-source-binding
+spec:
+  source:
+    ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1alpha1
+      name: kafka-not-secured-source
+    properties:
+      brokers: "my-cluster-kafka-bootstrap.kafka.svc.cluster.local:9092"
+      topic: "perf-test"
+  sink:
+    ref:
+      kind: Service
+      apiVersion: serving.knative.dev/v1
+      name: display
